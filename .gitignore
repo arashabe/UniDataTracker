@@ -1,4 +1,8 @@
+config.ini
+
 .idea/
 venv/
 build/
 dist/
+
+
