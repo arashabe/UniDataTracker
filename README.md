@@ -1,4 +1,4 @@
-# StudentTrackApp
+# <img src="UniDataTracker.ico" alt="App Screenshot" width="40"/>  StudentTrackApp
 
 **StudentTrackApp** is an intuitive and user-friendly application designed to manage and track student information using **SQL Server** and **PyQt5**. 
 This application enables users to select courses and faculties, perform detailed searches, retrieve data from the database, and display the results in a clear and organized manner.
@@ -41,6 +41,12 @@ To install and run StudentTrackApp, follow these steps:
     - Select the faculty and course from the dropdown menus.
     - Use the search bar and date range filters to perform detailed searches.
     - Click "Fetch Data" to retrieve and display the student information.
+
+
+<div style="text-align: center;">
+<img src="images/app_demo.PNG" alt="App Screenshot" width="600"/>
+</div>
+
 
 ## Building the Executable
 
