@@ -24,10 +24,10 @@ To install and run StudentTrackApp, follow these steps:
 First, create a new database in SQL Server. You can name it `StudentDB` or any name of your choice.
 
 ### Step 2: Create the Student Table
-Create a table named `anagrafica_studenti` in your database with the following fields:
+Create a table named `students_info` in your database with the following fields:
 
 ```sql
-CREATE TABLE anagrafica_studenti (
+CREATE TABLE students_info (
     StudentID INT PRIMARY KEY,
     FirstName NVARCHAR(50),
     LastName NVARCHAR(50),
@@ -40,10 +40,10 @@ CREATE TABLE anagrafica_studenti (
 ```
 
 ### Step 3: Insert Initial Records
-Insert initial records into the `anagrafica_studenti` table for testing purposes:
+Insert initial records into the `students_info` table for testing purposes:
 
 ```sql
-INSERT INTO anagrafica_studenti (StudentID, FirstName, LastName, DateOfBirth, Nationality, Email, Faculty, Course)
+INSERT INTO students_info (StudentID, FirstName, LastName, DateOfBirth, Nationality, Email, Faculty, Course)
 VALUES 
 (1, 'John', 'Doe', '2000-01-01', 'American', 'john.doe@example.com', 'Science', 'Biology'),
 (2, 'Jane', 'Smith', '1999-05-15', 'Canadian', 'jane.smith@example.com', 'Engineering', 'Computer Science');
