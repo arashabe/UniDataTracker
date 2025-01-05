@@ -63,10 +63,19 @@ Database = StudentDB
 UID = YOUR_USER_ID
 PWD = YOUR_PASSWORD
 ```
+-----------------
 
+## Plugins Needed
+- **PyQt5**
+- **pyqt5-qt5**
+- **cx-Freeze**
+- **pyodbc**
+
+---
+ 
 ## Usage
 
-1. **Run the application**:
+1. **Run the application 🚀**:
     ```bash
     python ssms.py
     ```
