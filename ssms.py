@@ -21,12 +21,12 @@ class MyWindow(QMainWindow):
         layout = QGridLayout()
         central_widget.setLayout(layout)
 
-        self.facolta_label = QLabel("Faculty:")
-        self.facolta_combo = QComboBox()
-        self.facolta_combo.currentIndexChanged.connect(self.update_corsi)
+        self.faculty_label = QLabel("Faculty:")
+        self.faculty_combo = QComboBox()
+        self.faculty_combo.currentIndexChanged.connect(self.update_courses)
 
-        self.corso_label = QLabel("Course:")
-        self.corso_combo = QComboBox()
+        self.course_label = QLabel("Course:")
+        self.course_combo = QComboBox()
 
         self.btn_fetch_data = QPushButton("Fetch Data")
         self.btn_fetch_data.clicked.connect(self.fetch_data)
@@ -58,11 +58,11 @@ class MyWindow(QMainWindow):
         self.pwd = config['Database_Con']['PWD']
 
         layout.setSpacing(5)
-        layout.addWidget(self.facolta_label, 0, 0)
-        layout.addWidget(self.facolta_combo, 0, 1)
+        layout.addWidget(self.faculty_label, 0, 0)
+        layout.addWidget(self.faculty_combo, 0, 1)
         layout.setColumnStretch(1, 1)
-        layout.addWidget(self.corso_label, 0, 2)
-        layout.addWidget(self.corso_combo, 0, 3)
+        layout.addWidget(self.course_label, 0, 2)
+        layout.addWidget(self.course_combo, 0, 3)
         layout.setColumnStretch(3, 1)
         layout.addWidget(self.btn_fetch_data, 0, 4)
         layout.setColumnStretch(4, 1)
@@ -106,7 +106,7 @@ class MyWindow(QMainWindow):
         self.btn_fetch_data.setStyleSheet(button_style)
         self.search_button.setStyleSheet(button_style)
         self.pushButtonExit.setStyleSheet(button_style)
-        self.update_facolta()
+        self.update_faculty()
 
         label_style = """
         QLabel {
@@ -157,14 +157,14 @@ class MyWindow(QMainWindow):
         }
         """
 
-        self.corso_label.setStyleSheet(label_style)
-        self.facolta_label.setStyleSheet(label_style)
+        self.course_label.setStyleSheet(label_style)
+        self.faculty_label.setStyleSheet(label_style)
         self.date_edit_start.setStyleSheet(date_edit_style)
         self.date_edit_end.setStyleSheet(date_edit_style)
         self.search_edit.setStyleSheet(line_edit_style)
 
-    def update_facolta(self):
-        self.facolta_combo.clear()
+    def update_faculty(self):
+        self.faculty_combo.clear()
 
         # Connection to the database with login uid and pwd
         # conn = pyodbc.connect(f'Driver={{SQL Server Native Client 11.0}};Server={self.server_name};Database={self.database_name};UID={self.uid};PWD={self.pwd};')
@@ -181,18 +181,18 @@ class MyWindow(QMainWindow):
             QMessageBox.critical(self, "Connection Error", error_msg)
 
         # Query to retrieve distinct faculties
-        query = "SELECT DISTINCT facolta FROM anagrafica_studenti"
+        query = "SELECT DISTINCT faculty FROM students_info"
         cursor.execute(query)
 
-        # Populate facolta_combo with distinct faculties obtained from the query
+        # Populate faculty_combo with distinct faculties obtained from the query
         for row in cursor.fetchall():
-            self.facolta_combo.addItem(row[0])
+            self.faculty_combo.addItem(row[0])
 
         conn.close()
 
-    def update_corsi(self):
-        self.corso_combo.clear()
-        facolta = self.facolta_combo.currentText()
+    def update_courses(self):
+        self.course_combo.clear()
+        faculty = self.faculty_combo.currentText()
 
         # Connection to the database with login uid and pwd
         # try:
@@ -210,12 +210,12 @@ class MyWindow(QMainWindow):
             QMessageBox.critical(self, "Connection Error", error_msg)
 
         # Query to retrieve distinct courses related to the selected faculty
-        query = "SELECT DISTINCT corso_di_laurea FROM anagrafica_studenti WHERE facolta = ?"
-        cursor.execute(query, (facolta,))
+        query = "SELECT DISTINCT Course FROM students_info WHERE faculty = ?"
+        cursor.execute(query, (faculty,))
 
-        # Populate corso_combo with distinct courses obtained from the query
+        # Populate course_combo with distinct courses obtained from the query
         for row in cursor.fetchall():
-            self.corso_combo.addItem(row[0])
+            self.course_combo.addItem(row[0])
 
         conn.close()
 
@@ -227,9 +227,9 @@ class MyWindow(QMainWindow):
 
         cursor = conn.cursor()
 
-        # Query to search the table anagrafica_studenti
-        query = "SELECT * FROM anagrafica_studenti WHERE facolta = ? AND corso_di_laurea = ?"
-        params = (self.facolta_combo.currentText(), self.corso_combo.currentText())
+        # Query to search the table students_info
+        query = "SELECT * FROM students_info WHERE faculty = ? AND Course = ?"
+        params = (self.faculty_combo.currentText(), self.course_combo.currentText())
         cursor.execute(query, params)
 
         # Create results table
@@ -280,12 +280,12 @@ class MyWindow(QMainWindow):
             error_msg = f"Error during database connection: {str(e)}"
             QMessageBox.critical(self, "Connection Error", error_msg)
 
-        # Query to search the table anagrafica_studenti
-        query = "SELECT * FROM anagrafica_studenti WHERE (LOWER(facolta) LIKE ? OR LOWER(corso_di_laurea) LIKE ? OR LOWER(nome) LIKE ? OR LOWER(cognome) LIKE ?) AND data_di_nascita >= ? and data_di_nascita <= ? ORDER BY data_di_nascita DESC"
+        # Query to search the table students_info
+        query = "SELECT * FROM students_info WHERE (LOWER(faculty) LIKE ? OR LOWER(Course) LIKE ? OR LOWER(FirstName) LIKE ? OR LOWER(LastName) LIKE ?) AND DateOfBirth >= ? and DateOfBirth <= ? ORDER BY DateOfBirth DESC"
         params = ['%' + search_text.lower() + '%'] * 4 + [search_date_satrt] + [search_date_end]
 
         # Query to search only the name field and the date
-        # query = "SELECT * FROM anagrafica_studenti WHERE ( LOWER(nome) LIKE ? ) AND data_di_nascita >= ? and data_di_nascita <= ? ORDER BY data_di_nascita DESC"
+        # query = "SELECT * FROM students_info WHERE ( LOWER(FirstName) LIKE ? ) AND DateOfBirth >= ? and DateOfBirth <= ? ORDER BY DateOfBirth DESC"
         # params = ['%' + search_text.lower() + '%'] * 1 + [search_date_satrt] + [search_date_end]
 
         cursor.execute(query, params)
