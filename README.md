@@ -1,6 +1,6 @@
-# <img src="UniDataTracker.ico" alt="App Screenshot" width="40"/>  StudentTrackApp
+# <img src="UniDataTracker.ico" alt="App Screenshot" width="40"/>  UniDataTracker
 
-**StudentTrackApp** is an intuitive and user-friendly application designed to manage and track student information using **SQL Server** and **PyQt5**. This application enables users to select courses and faculties, perform detailed searches, retrieve data from the database, and display the results in a clear and organized manner.
+**UniDataTracker** is an intuitive and user-friendly application designed to manage and track student information using **SQL Server** and **PyQt5**. This application enables users to select courses and faculties, perform detailed searches, retrieve data from the database, and display the results in a clear and organized manner.
 
 ## Project Objectives
 The goals of this project are to:
@@ -18,7 +18,7 @@ The goals of this project are to:
 
 ## Installation
 
-To install and run StudentTrackApp, follow these steps:
+To install and run UniDataTracker, follow these steps:
 
 ### Step 1: Create the Database
 First, create a new database in SQL Server. You can name it `StudentDB` or any name of your choice.
@@ -91,7 +91,7 @@ PWD = YOUR_PASSWORD
 
 ## Building the Executable
 
-To create an executable for StudentTrackApp using `cx_Freeze`, follow these steps:
+To create an executable for UniDataTracker using `cx_Freeze`, follow these steps:
 
 1. **Install cx_Freeze**:
     ```bash
