@@ -16,6 +16,17 @@ The goals of this project are to:
 - **User-Friendly Interface**: Designed with an intuitive and easy-to-navigate interface using PyQt5.
 - **Secure Configuration**: Securely manage database connection settings.
 
+## Project Structure
+```text
+UniDataTracker/
+├── doc/
+├── images/
+├── ssms.py
+├── config.ini
+├── UniDataTracker.ico
+└── setup.py
+```
+
 ## Installation
 
 To install and run UniDataTracker, follow these steps:
@@ -54,7 +65,7 @@ Clone the repository and open it in your IDE, like PyCharm.
 
 
 ### Step 5: Configure the Database Connection
-Update the `config.ini` file with your database connection settings:
+Create and update the `config.ini` file with your database connection settings:
 
 ```ini
 [Database_Con]
