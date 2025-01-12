@@ -76,7 +76,12 @@ PWD = YOUR_PASSWORD
 ```
 -----------------
 
-## Plugins Needed
+## PyCharm Basic Configuration:
+
+1. Select `File | Settings | Project: UniDataTracker | Project Interpreter`.
+2. Set the Project Interpreter to the version of Python you are using.
+3. Click on the `+`, find, and install the third-party libraries:
+
 - **PyQt5**
 - **pyqt5-qt5**
 - **cx-Freeze**
